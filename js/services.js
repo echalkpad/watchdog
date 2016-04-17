@@ -10,23 +10,28 @@ angular.module('watchdog')
                         "status": "active",
                         "channel_name": "ch1",
                         "alt": "iphone",
-                        "image": "glyph stroked app-window"
+                        "image": "glyph stroked app-window",
+                        "checked": false
+
                     },
                  {
-                     "device_id": 1,
+                     "device_id": 2,
                      "device_name": "My iphone",
                      "status": "active",
                      "channel_name": "ch1",
                      "alt": "iphone",
-                     "image": "glyph stroked app-window"
+                     "image": "glyph stroked app-window",
+                     "checked": false
+
                  },
                  {
-                     "device_id": 1,
+                     "device_id": 3,
                      "device_name": "My iphone",
                      "status": "active",
                      "channel_name": "ch1",
                      "alt": "iphone",
-                     "image": "glyph stroked app-window"
+                     "image": "glyph stroked app-window",
+                     "checked": false
                  }
                 ]
             ;

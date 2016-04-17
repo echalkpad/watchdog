@@ -3,7 +3,23 @@ angular.module('watchdog')
     .
     controller('DeviceController',['$scope','appFactory' , function($scope,appFactory) {
         $scope.appliances= appFactory.getAppliances();
-        console.log($scope.appliance)
+        console.log($scope.appliances)
+
+
+        // remove an item
+        $scope.remove = function() {
+            console.log("Remove function called")
+            $scope.appliances.forEach(function(appliance) {
+
+                if(appliance.checked){
+                    console.log("Removing "+appliance.device_id)
+
+                }
+
+            });
+            //$scope.items.splice(index, 1);
+        };
+
     }])
     .
     controller('HomePageController',['$scope','appFactory' , function($scope,appFactory) {
