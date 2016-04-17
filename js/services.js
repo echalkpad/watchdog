@@ -1,6 +1,6 @@
 'use strict';
 angular.module('watchdog')
-    .constant("baseURL","https://demo5924853.mockable.io")
+    .constant("baseURL","http://localhost:4000")
     .factory('appFactory',['$http','baseURL',function($http,baseURL) {
         var appfac={};
         /*var appliances=
