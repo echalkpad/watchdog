@@ -1,8 +1,9 @@
 'use strict';
 angular.module('watchdog')
-    .factory('appFactory', [function() {
+    .constant("baseURL","https://demo5924853.mockable.io")
+    .factory('appFactory',['$http','baseURL',function($http,baseURL) {
         var appfac={};
-        var appliances=
+        /*var appliances=
              [
                     {
                         "device_id": 1,
@@ -35,7 +36,7 @@ angular.module('watchdog')
                  }
                 ]
             ;
-
+*/
         var appliance_usage=[
             {
                 "device_id": 1,
@@ -59,7 +60,8 @@ angular.module('watchdog')
         };
 
         appfac.getAppliances=function(){
-            return appliances;
+            console.log($http.get(baseURL+"/appliances"))
+            return $http.get(baseURL+"/appliances")
         };
         return appfac;
     }]);

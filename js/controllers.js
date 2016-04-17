@@ -2,8 +2,14 @@
 angular.module('watchdog')
     .
     controller('DeviceController',['$scope','appFactory' , function($scope,appFactory) {
-        $scope.appliances= appFactory.getAppliances();
-        console.log($scope.appliances)
+        $scope.appliances= [];
+        appFactory.getAppliances()
+            .then(
+            function(response) {
+                $scope.appliances = response.data;
+            }
+        );
+        console.log($scope.appliances);
 
 
         // remove an item
