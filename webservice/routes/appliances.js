@@ -51,10 +51,19 @@ exports.deleteApp = function(req, res) {
     });
 };
 
-
 exports.addApp = function(req, res) {
     var app = req.body;
     console.log("Appliance: "+app.device_id)
+    db.collection('appliances', function(err, collection) {
+        collection.insert(app, {safe:true}, function(err, result) {
+            if (err) {
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('Success: ' + JSON.stringify(result));
+                res.send(result[0]);
+            }
+        });
+    });
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/

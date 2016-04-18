@@ -11,8 +11,14 @@ angular.module('watchdog')
         );
         console.log($scope.appliances);
 
+        $scope.add=function(appliance){
+           var app=angular.copy(appliance);
+            app.checked=false;
+            console.log("Adding appliance!"+JSON.stringify(app));
+            appFactory.addAppliance(app);
+        }
 
-        // remove an item
+        // remove an appliance
         $scope.remove = function() {
             console.log("Remove function called")
             $scope.appliances.forEach(function(appliance) {
@@ -23,7 +29,6 @@ angular.module('watchdog')
                 }
 
             });
-            //$scope.items.splice(index, 1);
         };
 
     }])

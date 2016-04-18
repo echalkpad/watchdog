@@ -55,6 +55,10 @@ angular.module('watchdog')
             }
         ];
 
+        appfac.addAppliance=function(app){
+            return $http.post(baseURL+"/appliances/",app);
+        }
+
         appfac.getUsageHistory=function(){
             return appliance_usage;
         };
