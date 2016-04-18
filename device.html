@@ -22,7 +22,7 @@
 
 </head>
 
-<body ng-controller="DeviceController">
+<body ng-controller="DeviceController as dc">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -109,7 +109,10 @@
                             <svg class={{appliance.image}}>
                                 <use xlink:href="#stroked-app-window-with-content"/>
                             </svg>
-                            <pre>{{appliance.channel_name}}</pre>
+                            <pre>
+                                <button ng-click="activate(appliance)" ng-hide="isActive(appliance.status)">Activate!</button>
+                                <button ng-click="deactivate(appliance)" ng-show="isActive(appliance.status)">Deactivate!</button>
+                            </pre>
                         </div>
                     </div>
                 </div>
@@ -141,7 +144,7 @@
                                 <!--Form-->
                                 <form novalidate class="simple-form">
                                     Device Id: <input type="text" ng-model="appliance.device_id" /><br />
-                                    Device name: <input type="email" ng-model="appliance.device_name" /><br />
+                                    Device name:  <input type="text" ng-model="appliance.device_name" /><br />
                                     channel name: <input type="text" ng-model="appliance.channel_name" /><br />
                                     device_info: <input type="text" ng-model="appliance.device_info" /><br />
                                     Status: <input type="radio" ng-model="appliance.status" value="Active" />Active?
@@ -156,7 +159,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
 

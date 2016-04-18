@@ -55,6 +55,9 @@ angular.module('watchdog')
             }
         ];
 
+        appfac.updateAppliance=function(app){
+            return $http.put(baseURL+"/appliances/"+app.device_id,app);
+        }
         appfac.addAppliance=function(app){
             return $http.post(baseURL+"/appliances/",app);
         }

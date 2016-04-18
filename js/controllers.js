@@ -31,6 +31,23 @@ angular.module('watchdog')
             });
         };
 
+        $scope.isActive=function(status){
+            if(status==="active")
+                return true;
+            else
+                return false;
+        }
+
+        $scope.deactivate=function(appliance){
+            appliance.status="inactive"
+            appFactory.updateAppliance(appliance);
+
+        }
+        $scope.activate=function(appliance){
+            appliance.status="active"
+            appFactory.updateAppliance(appliance);
+        }
+
     }])
     .
     controller('HomePageController',['$scope','appFactory' , function($scope,appFactory) {

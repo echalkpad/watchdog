@@ -29,7 +29,6 @@ exports.findAll = function(req, res) {
     });
 };
 
-
 exports.deleteApp = function(req, res) {
    // db.close;
     console.log("Req method is: "+req.method)
@@ -37,8 +36,8 @@ exports.deleteApp = function(req, res) {
     console.log("Device id is: "+typeof id)
     db.open(function(err,db){
     db.collection('appliances', function (err, coll) {
-           // console.log("Collection is: " + JSON.stringify(coll));
-        coll.remove({device_id: parseInt(id)}, function (err, result) {
+           // console.log("Collection is: " + JSON.stringify(coll)); parseInt(id)
+        coll.remove({device_id: id}, function (err, result) {
                 if (err) {
                     res.send({'error': 'An error has occurred - ' + err});
                 } else {
@@ -53,7 +52,7 @@ exports.deleteApp = function(req, res) {
 
 exports.addApp = function(req, res) {
     var app = req.body;
-    console.log("Appliance: "+app.device_id)
+    console.log("Appliance: "+JSON.stringify(app))
     db.collection('appliances', function(err, collection) {
         collection.insert(app, {safe:true}, function(err, result) {
             if (err) {
@@ -66,6 +65,24 @@ exports.addApp = function(req, res) {
     });
 }
 
+exports.updateApp = function(req, res) {
+    var id = req.params.id;
+    var app = req.body;
+    console.log('Updating appliance: ' + id);
+    console.log(JSON.stringify(app));
+    db.collection('appliances', function(err, collection) {
+        collection.update({'device_id':id}, app, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error updating appliance: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('' + result + ' document(s) updated');
+                res.send(app);
+            }
+        });
+    });
+}
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
@@ -73,7 +90,7 @@ var populateDB = function() {
 
     var appliances = [
         {
-            "device_id": 1,
+            "device_id": "1",
             "device_name": "My iphone",
             "status": "active",
             "channel_name": "ch1",
@@ -83,7 +100,7 @@ var populateDB = function() {
 
         },
         {
-            "device_id": 2,
+            "device_id": "2",
             "device_name": "My iphone",
             "status": "active",
             "channel_name": "ch1",
@@ -93,9 +110,9 @@ var populateDB = function() {
 
         },
         {
-            "device_id": 3,
+            "device_id": "3",
             "device_name": "My iphone",
-            "status": "active",
+            "active": "active",
             "channel_name": "ch1",
             "alt": "iphone",
             "image": "glyph stroked app-window",
