@@ -16,7 +16,8 @@
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
 <![endif]-->
-
+	<script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.10/eon.js"></script>
+	<link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.10/eon.css"/>
 </head>
 
 <body>
@@ -70,7 +71,9 @@
 					<div class="panel-heading">Health Overview</div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="line-chart" height="150" width="600"></canvas>
+							<div id="chart"></div>
+							<!--<canvas class="main-chart" id="line-chart" height="150" width="600"></canvas> -->
+
 						</div>
 					</div>
 				</div>
@@ -107,6 +110,14 @@
 	</script>
 	<script src="js/chart.min.js"></script>
 	<script src="js/chart-data.js"></script>
+	<script>
+		eon.chart({
+			channel: "mobilexyz", // the pubnub channel for real time data
+			generate: {           // c3 chart object
+				bindto: '#chart'
+			}
+		});
+	</script>
 </body>
 
 </html>
