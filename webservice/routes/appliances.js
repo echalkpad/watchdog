@@ -5,6 +5,7 @@ var Server = mongo.Server,
     BSON = mongo.BSONPure;
 
 var server = new Server('localhost', 27017, {auto_reconnect: true});
+
 db = new Db('watchdogdb', server);
 
 db.open(function(err, db) {
@@ -50,6 +51,12 @@ exports.deleteApp = function(req, res) {
     });
 };
 
+
+exports.addApp = function(req, res) {
+    var app = req.body;
+    console.log("Appliance: "+app.device_id)
+}
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
@@ -71,7 +78,7 @@ var populateDB = function() {
             "device_name": "My iphone",
             "status": "active",
             "channel_name": "ch1",
-            "alt": "iphone",
+            "device_info": "iphone",
             "image": "glyph stroked app-window",
             "checked": false
 
