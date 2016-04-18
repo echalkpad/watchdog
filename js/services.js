@@ -63,6 +63,11 @@ angular.module('watchdog')
             console.log($http.get(baseURL+"/appliances"))
             return $http.get(baseURL+"/appliances")
         };
+
+        appfac.deleteAppliance=function(id){
+            console.log("service delete: "+id);
+            $http.delete(baseURL+"/appliances/"+id);
+        }
         return appfac;
     }]);
 

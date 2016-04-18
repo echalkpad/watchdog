@@ -19,7 +19,7 @@ angular.module('watchdog')
 
                 if(appliance.checked){
                     console.log("Removing "+appliance.device_id)
-
+                    appFactory.deleteAppliance(appliance.device_id)
                 }
 
             });
