@@ -57,7 +57,7 @@ exports.addApp = function(req, res) {
     });
 }
 
-exports.updateApp = function(req, res) {
+/*exports.updateApp = function(req, res) {
     var id = req.params.id;
     var app = req.body;
     console.log('Updating appliance: ' + id);
@@ -70,6 +70,34 @@ exports.updateApp = function(req, res) {
             } else {
                 console.log('' + result + ' document(s) updated');
                 res.send(app);
+            }
+        });
+    });
+}*/
+
+exports.updateApp = function(req, res) {
+    var userid=req.params.userid;
+    var id = req.params.id;
+    var app = req.body;
+
+    console.log('Updating appliance: ' + id);
+    console.log(JSON.stringify(app));
+    db.collection('appliances', function(err, collection) {
+        collection.remove({device_id: id,userid: userid}, function (err, result) {
+            if (err) {
+                res.send({'error': 'An error has occurred - ' + err});
+            } else {
+                res.send("Document deleted");
+                console.log('' + result + ' document(s) deleted');
+
+            }
+        });
+        collection.insert(app, {safe:true}, function(err, result) {
+            if (err) {
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('Success: ' + JSON.stringify(result));
+                res.send(result[0]);
             }
         });
     });

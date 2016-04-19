@@ -56,7 +56,8 @@ angular.module('watchdog')
         ];
 
         appfac.updateAppliance=function(app){
-            return $http.put(baseURL+"/appliances/"+app.device_id,app);
+            var userid=sessionStorage.getItem("userid")
+            return $http.put(baseURL+"/appliances/"+userid+"/"+app.device_id,app);
         }
         appfac.addAppliance=function(app){
             return $http.post(baseURL+"/appliances/",app);

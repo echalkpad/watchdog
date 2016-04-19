@@ -10,12 +10,22 @@ angular.module('watchdog')
             }
         );*/
 
-        appFactory.getAppliances()
+        $scope.findByUserId=appFactory.getAppliances()
                 .then(
                 function(response) {
+                    console.log("Retrieving appliances");
                     $scope.appliances = response.data;
                 }
         );
+
+        appFactory.getAppliances()
+            .then(
+            function(response) {
+                console.log("Retrieving appliances");
+                $scope.appliances = response.data;
+            }
+        );
+
 
         $scope.add=function(appliance){
            var app=angular.copy(appliance);
@@ -23,6 +33,7 @@ angular.module('watchdog')
             app.userid=sessionStorage.getItem("userid");
             console.log("Adding appliance!"+JSON.stringify(app));
             appFactory.addAppliance(app);
+            location.reload();
         }
 
         // remove an appliance

@@ -16,7 +16,7 @@ app.get('/appliances', appliances.findAll);
 app.get('/appliances/:userId', appliances.find);
 app.delete('/appliances/:userid/:id', appliances.deleteApp);
 app.post('/appliances', appliances.addApp);
-app.put('/appliances/:id',appliances.updateApp);
+app.put('/appliances/:userid/:id',appliances.updateApp);
 app.listen(4000);
 
 
