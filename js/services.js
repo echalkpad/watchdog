@@ -66,14 +66,20 @@ angular.module('watchdog')
             return appliance_usage;
         };
 
-        appfac.getAppliances=function(){
+       /*appfac.getAppliances=function(){
             console.log($http.get(baseURL+"/appliances"))
             return $http.get(baseURL+"/appliances")
+        };*/
+
+        appfac.getAppliances=function(){
+            console.log($http.get(baseURL+"/appliances/"+sessionStorage.getItem("userid")));
+            return $http.get(baseURL+"/appliances/"+sessionStorage.getItem("userid"));
         };
 
-        appfac.deleteAppliance=function(id){
-            console.log("service delete: "+id);
-            $http.delete(baseURL+"/appliances/"+id);
+
+        appfac.deleteAppliance=function(id,userid){
+            console.log("service delete: "+id+" for username "+userid);
+            $http.delete(baseURL+"/appliances/"+userid+"/"+id);
         }
         return appfac;
     }]);

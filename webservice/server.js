@@ -3,6 +3,7 @@ var cors = require('cors')
 var express = require('express'),
     appliances = require('./routes/appliances');
     devices = require('./routes/devices');
+    users=require('./routes/users');
 
 var cors = require('cors')
 var app = express();
@@ -12,7 +13,8 @@ app.use(cors())
 app.options('*', cors());
 
 app.get('/appliances', appliances.findAll);
-app.delete('/appliances/:id', appliances.deleteApp);
+app.get('/appliances/:userId', appliances.find);
+app.delete('/appliances/:userid/:id', appliances.deleteApp);
 app.post('/appliances', appliances.addApp);
 app.put('/appliances/:id',appliances.updateApp);
 app.listen(4000);
