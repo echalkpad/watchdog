@@ -2,8 +2,10 @@
 
 var client_cas = require('../conf/cassandra-conf');
 var fc = require('../utility/functions');
+var healthData = require('../data/critical-health-data');
 var cassandra =  require('cassandra-driver');
 var async = require('async');
+
 
 
 exports.getDeviceHealth = function(req, res){
@@ -55,6 +57,61 @@ exports.getDeviceHealth = function(req, res){
         )
 
 }
+
+
+exports.getDeviceData = function(req, res) {
+  console.log("************************channel******************"+req.params.channel);
+
+  var cquery = "";
+  //var cquery = "select * from dailystatisticsdata where date >= '"+req.params.start_date+"' and date <='"+req.params.end_date+"' ALLOW FILTERING";
+
+  cquery = "select * from refrigerator where channel='"+req.params.channel+"'";
+
+  console.log("*****************************cquery********************************"+cquery);
+  client_cas.execute(cquery, function (err, result) {
+    if (typeof result === 'undefined')
+      console.log("No Data");
+    else {
+      if (result.rows.length === 0) {
+        console.log("No Data");
+        res.send("No Data for this channel");
+      }
+      else {
+        console.log("********************** RESULT*****************"+result);
+
+        var data = healthData.deveiceCriticalHealth();
+        console.log(data);
+
+
+        res.send(result);
+        // AlljsonServices='[';
+
+        // for (var i = 0; i < result.rows.length; i++) {
+
+        //   service = result.rows[i];
+
+        //   jsonService = '{ '
+        //   + '"service_id" : "'+ service.service_id + '", '
+        //   + '"title" : "'+ service.title + '", '
+        //   + '"description" : "'+ service.description + '", '
+        //   + '"date_creation" : "'+ service.date_creation + '", '
+        //   + '"duration" : "'+ service.duration + '", '
+        //   + '"type" : "'+ service.type + '", '
+        //   + '"usage_date" : "'+ service.usage_date + '", '
+        //   + '"username" : "'+ service.username + '"},';
+
+        //   AlljsonServices=AlljsonServices+jsonService;
+        // }
+
+        // AlljsonServices=AlljsonServices.slice(0, - 1)+']';
+
+        // return reply(AlljsonServices);
+      }
+    }
+
+  });
+}
+
 
 exports.addDeviceData = function(req, res) {
     var payload = req.body;

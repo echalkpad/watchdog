@@ -10,6 +10,11 @@ angular.module('watchdog')
             }
         );*/
 
+        $scope.storeAppId=function(channel_id){
+            console.log("channel id is: "+channel_id)
+            sessionStorage.setItem("channel_id",channel_id)
+        }
+
         $scope.findByUserId=appFactory.getAppliances()
                 .then(
                 function(response) {
