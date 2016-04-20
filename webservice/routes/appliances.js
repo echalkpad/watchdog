@@ -134,9 +134,9 @@ var populateDB = function() {
         {
             "userid": "10208805958773426",
             "device_id": "1",
-            "device_name": "My iphone",
+            "device_name": "My iphone c3",
             "status": "active",
-            "channel_name": "ch1",
+            "channel_name": "c3",
             "alt": "iphone",
             "image": "glyph stroked app-window",
             "checked": false

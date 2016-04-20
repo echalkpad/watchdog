@@ -105,7 +105,7 @@
                 <div class="panel-body">
                     <div class="icon-grid">
                         <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="appliance in appliances | filter: checked==false">
-                            <pre><a href="health.html">{{appliance.device_name}}</a></pre>
+                            <pre><a href="timeline.html" ng-click="storeAppId(appliance.channel_name)">{{appliance.device_name}}</a></pre>
                             <svg class={{appliance.image}}>
                                 <use xlink:href="#stroked-app-window-with-content"/>
                             </svg>
