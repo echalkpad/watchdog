@@ -3,29 +3,52 @@ angular.module('watchdog')
     .
     controller('DeviceController',['$scope','appFactory' , function($scope,appFactory) {
         $scope.appliances= [];
-        appFactory.getAppliances()
+      /*  appFactory.getAppliances()
             .then(
             function(response) {
                 $scope.appliances = response.data;
             }
+        );*/
+
+        $scope.storeAppId=function(channel_id){
+            console.log("channel id is: "+channel_id)
+            sessionStorage.setItem("channel_id",channel_id)
+        }
+
+        $scope.findByUserId=appFactory.getAppliances()
+                .then(
+                function(response) {
+                    console.log("Retrieving appliances");
+                    $scope.appliances = response.data;
+                }
         );
-        console.log($scope.appliances);
+
+        appFactory.getAppliances()
+            .then(
+            function(response) {
+                console.log("Retrieving appliances");
+                $scope.appliances = response.data;
+            }
+        );
+
 
         $scope.add=function(appliance){
            var app=angular.copy(appliance);
             app.checked=false;
+            app.userid=sessionStorage.getItem("userid");
             console.log("Adding appliance!"+JSON.stringify(app));
             appFactory.addAppliance(app);
+            location.reload();
         }
 
         // remove an appliance
         $scope.remove = function() {
-            console.log("Remove function called")
+            console.log("Remove function called");
             $scope.appliances.forEach(function(appliance) {
 
                 if(appliance.checked){
                     console.log("Removing "+appliance.device_id)
-                    appFactory.deleteAppliance(appliance.device_id)
+                    appFactory.deleteAppliance(appliance.device_id,appliance.userid)
                 }
 
             });
