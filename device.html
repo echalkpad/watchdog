@@ -143,13 +143,13 @@
                             <div class="modal-body">
                                 <!--Form-->
                                 <form novalidate class="simple-form">
-                                    Device Id: <input type="text" ng-model="appliance.device_id" /><br />
-                                    Device name:  <input type="text" ng-model="appliance.device_name" /><br />
-                                    channel name: <input type="text" ng-model="appliance.channel_name" /><br />
-                                    device_info: <input type="text" ng-model="appliance.device_info" /><br />
-                                    Status: <input type="radio" ng-model="appliance.status" value="Active" />Active?
-                                    <input type="button" ng-click="reset()" value="Reset" />
-                                    <input type="submit" ng-click="add(appliance)" value="Save" />
+                                    <input class="form-control" placeholder="Device Id" type="text" ng-model="appliance.device_id"/><br />
+                                    <input class="form-control" placeholder="Device Name" type="text" ng-model="appliance.device_name"/><br />
+                                    <input class="form-control" placeholder="Channel Name" type="text" ng-model="appliance.channel_name"/><br />
+                                    <input class="form-control" placeholder="Device Information" type="text" ng-model="appliance.device_info"/><br />
+                                    <input type="checkbox" ng-model="appliance.status" value="Active" style="padding-right: 30px">   Active<br /><br />
+                                    <button type="submit" class="btn btn-primary" ng-click="add(appliance)" value="Save" >Submit Button</button>
+                                    <button type="reset" class="btn btn-default" ng-click="reset()" value="Reset">Reset Button</button>
                                 </form>
                             </div>
                             <div class="modal-footer">
