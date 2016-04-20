@@ -3,7 +3,7 @@ var cors = require('cors')
 var express = require('express'),
     appliances = require('./routes/appliances');
     devices = require('./routes/devices');
-    users=require('./routes/users');
+    //users=require('./routes/users');
 
 var cors = require('cors')
 var app = express();
