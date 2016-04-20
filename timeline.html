@@ -83,6 +83,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <script>
     var channel_name=sessionStorage.getItem("channel_id")
@@ -111,23 +112,6 @@
         publish_key: 'demo',
         subscribe_key: 'demo'
     });
-
-    /*
-    setInterval(function(){
-
-        pubnub.publish({
-            channel: channel,
-            message: {
-                eon: {
-                    'Austin': Math.floor(Math.random() * 99),
-                    'New York': Math.floor(Math.random() * 99),
-                    'San Francisco': Math.floor(Math.random() * 99),
-                    'Portland': Math.floor(Math.random() * 99)
-                }
-            }
-        });
-
-    }, 1000);*/
 
 </script>
 </body>
