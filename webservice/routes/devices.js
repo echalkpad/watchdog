@@ -2,11 +2,16 @@
 
 var client_cas = require('../conf/cassandra-conf');
 var fc = require('../utility/functions');
+var healthData = require('../data/critical-health-data');
 var cassandra =  require('cassandra-driver');
 
 
 exports.getDeviceData = function(req, res) {
   console.log("************************channel******************"+req.params.channel);
+
+  var cquery = "";
+  //var cquery = "select * from dailystatisticsdata where date >= '"+req.params.start_date+"' and date <='"+req.params.end_date+"' ALLOW FILTERING";
+
   cquery = "select * from refrigerator where channel='"+req.params.channel+"'";
 
   console.log("*****************************cquery********************************"+cquery);
@@ -20,6 +25,11 @@ exports.getDeviceData = function(req, res) {
       }
       else {
         console.log("********************** RESULT*****************"+result);
+
+        var data = healthData.deveiceCriticalHealth();
+        console.log(data);
+
+
         res.send(result);
         // AlljsonServices='[';
 

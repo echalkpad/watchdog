@@ -1,3 +1,3 @@
 var cassandra = require('cassandra-driver');
 
-module.exports = new cassandra.Client({contactPoints: ['127.0.0.1'], keyspace: 'devices'});
+module.exports = new cassandra.Client({contactPoints: ['127.0.0.1'], keyspace: 'dog'});
