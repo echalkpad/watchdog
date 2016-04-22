@@ -79,8 +79,10 @@ angular.module('watchdog')
     }])
     .
     controller('HealthController',['$scope','appFactory' , function($scope,appFactory) {
-        $scope.appliances= appFactory.getAppliances();
-        console.log($scope.appliance)
+        $scope.prediction=function(){
+            console.log("Health prediction");
+            window.location="Prediction.html";
+        }
     }])
     .
     controller('DashboardController',['$scope','appFactory' , function($scope,appFactory) {

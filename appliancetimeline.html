@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="watchdog">
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -28,7 +28,7 @@
     <script src="js/html5shiv.min.js"></script>
 
     </head>
-    <body>
+    <body ng-controller="HealthController">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -81,6 +81,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary" ng-click="prediction()" >Prediction</button>
         </div>
     </div>
 </div>
