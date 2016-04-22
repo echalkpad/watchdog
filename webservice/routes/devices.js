@@ -3,10 +3,20 @@
 var client_cas = require('../conf/cassandra-conf');
 var fc = require('../utility/functions');
 var healthData = require('../data/critical-health-data');
+var coefficient = require('../data/coefficient');
 var cassandra =  require('cassandra-driver');
 var async = require('async');
+var jsonfile = require('jsonfile');
 
 
+exports.getWeeklyUsage = function(req, res) {
+    var userId = req.params.userId;
+
+    //fetch all appliances for this user
+
+    //for each appliance fetch the usagestatistics
+
+}
 
 exports.getDeviceHealth = function(req, res){
   var payload = req.body;
@@ -17,38 +27,89 @@ exports.getDeviceHealth = function(req, res){
 
   async.waterfall([
             function(callback){
-                stripe.tokens.create({
-                    card:cardData
-                }, function(err, token){
-                    if(err) console.log(err);
-                    callback(null, token.id, isDefaultSource);
+                
+                switch(device_type){
+                  //select * from dailystatisticsdata where date >= '2013-04-03' and date <='2013-04-04' ALLOW FILTERING ;
+                  case "tv" : cquery = "select dailyusage from dailystatisticstelevisiondata where date >= '"+start_date+"' and date <='"+end_date+"' ALLOW FILTERING "; break;
+                  case "refrigerator" : cquery = "select dailyaverage from dailystatisticsrefrigeratordata where date >= '"+start_date+"' and date <='"+end_date+"' ALLOW FILTERING "; break;
+                  case "washing_machine" : cquery = "select dailyaverage from dailystatisticswashingmachinedata where date >= '"+start_date+"' and date <='"+end_date+"' ALLOW FILTERING "; break;
+                  case "mobile" : cquery = "select dailyaverage from dailystatisticsmobiledata where date >= '"+start_date+"' and date <='"+end_date+"' ALLOW FILTERING "; break;
+                }
+
+                ////testing purpose
+                cquery = "select * from dailystatisticsrefrigeratordata";
+
+                client_cas.execute(cquery, function (err, result) {
+                  if(err) {
+                    console.log("Error : "+err)
+                  }
+                  if (typeof result === 'undefined')
+                    console.log("No Data1");
+                  else {
+                    // if (result.rows.length === 0) {
+                    //   console.log("No Data2");
+                    //   res.send("No Data for this channel3");
+                    // }
+                    // else {
+                      //console.log("********************** RESULT *****************"+result);
+                      //var data = healthData.deveiceCriticalHealth();
+                      //console.log(result);
+                      //callback(null, result/5);
+                      callback(null, 225, device_type);
+                    //}
+                  }
                 })
             },
 
-            function(tokenId, isDefaultSource, callback) {
-                stripe.customers.createSource(
-                    customerId,
-                    {source : tokenId},
-                    function(err, card) {
-                        if(err) console.log(err);
-                        console.log("Customer updated with card : "+card.id)
-                        if(isDefaultSource){
-                            callback(null, card.id);
-                        }
-                    }
-                )
+            function(deviceData, device_type, callback) {
+                var cquery = "";
+                
+                //cquery = "select SUM(dailyaverageall) from dailystatisticsrefrigeratoralldevice where date >= '"+start_date+"' and date <='"+end_date+"' ALLOW FILTERING "; break; 
+                cquery = "select * from dailystatisticsrefrigeratoralldevice";
+                client_cas.execute(cquery, function(err, result) {
+                  if(err) {
+                    console.log("Error : "+err);
+                  }
+                  if (typeof result === 'undefined')
+                    console.log("No Data3");
+                  else {
+                      // if (result.rows.length === 0) {
+                      //     console.log("No Data4");
+                      //     res.send("No Data for this channel4");
+                      // }
+                      // else {
+                          //console.log("********************** RESULT2 *****************" + result);
+                          //var data = healthData.deveiceCriticalHealth();
+                         // console.log(result);
+                          //callback(null, result/5);
+                          callback(null, deviceData, device_type, 225);
+                      //}
+                  }
+
+                })
+
+                
             },
 
-            function(cardId) {
-                stripe.customers.update(
-                    customerId,
-                    {
-                        default_source : cardId
-                    }, function(err, customer) {
-                        if(err) console.log(err);
-                        console.log("Customer default source updated!" +cardId);
-                    }
-                )
+            function(deviceData, device_type, overAllData) {
+              var data = healthData.deveiceCriticalHealth();
+              var coef = coefficient.deviceCoefficient()[device_type];
+
+
+                var data = {
+                    "data" : {
+                        "columns": [
+                            ["data1", deviceData],
+                            ["data2", overAllData],
+                            ["data3", data.refrigerator]
+                        ],
+                        "type": "bar"
+                    },
+                    "message" : "Based on the your usage the patters and the coefficient, the shelf life of your device is "+(coef/deviceData)
+                };
+
+                console.log(data);
+                res.send(data);
             }
         ], function(err, data){
                 if(err) console.log(err);
