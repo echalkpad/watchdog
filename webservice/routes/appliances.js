@@ -44,6 +44,7 @@ exports.deleteApp = function(req, res) {
 
 exports.addApp = function(req, res) {
     var app = req.body;
+    console.log("Device type is "+app.device_type)
     console.log("Appliance: "+JSON.stringify(app))
     db.collection('appliances', function(err, collection) {
         collection.insert(app, {safe:true}, function(err, result) {
@@ -133,6 +134,7 @@ var populateDB = function() {
     var appliances = [
         {
             "userid": "10208805958773426",
+            "device_type": "mobiletimeline.html",
             "device_id": "1",
             "device_name": "My iphone c3",
             "status": "active",
@@ -144,6 +146,7 @@ var populateDB = function() {
         },
         {
             "userid": "10208805958773426",
+            "device_type": "appliancetimeline.html",
             "device_id": "2",
             "device_name": "My iphone",
             "status": "active",
@@ -155,6 +158,7 @@ var populateDB = function() {
         },
         {
             "userid": "1020880595877342",
+            "device_type" : "appliancetimeline.html",
             "device_id": "3",
             "device_name": "My iphone",
             "active": "active",

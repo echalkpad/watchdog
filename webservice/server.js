@@ -3,7 +3,7 @@ var cors = require('cors')
 var express = require('express'),
     appliances = require('./routes/appliances');
     devices = require('./routes/devices');
-    users=require('./routes/users');
+    //users=require('./routes/users');
 
 var cors = require('cors')
 var app = express();
@@ -23,5 +23,7 @@ app.listen(4000);
 //cassandra services
 app.post('/devices', devices.addDeviceData);
 app.get('/devices/:channel', devices.getDeviceData);
+app.post('/devices/health', devices.getDeviceHealth)
+app.get('/devices/weeklyusage/:userId', devices.getWeeklyUsage);
 
 console.log('Listening on port 4000...');
