@@ -13,6 +13,7 @@
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <![endif]-->
 
     <!--Angular js-->
@@ -102,16 +103,20 @@
                 </div> -->
                 <div class="panel-body">
                     <div class="icon-grid">
-                        <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="appliance in appliances | filter: checked==false">
-                            <pre><a href="{{appliance.device_type}}" ng-click="storeAppId(appliance.channel_name)">{{appliance.device_name}}</a></pre>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 " ng-repeat="appliance in appliances | filter: checked==false">
+                            <pre style="font-family: 'Playfair Display', serif;font-size: 20px;background-color: currentColor;"><a href="{{appliance.device_type}}" ng-click="storeAppId(appliance.channel_name)">{{appliance.device_name}}</a></pre>
                             <svg class={{appliance.image}}>
-                                <use xlink:href="#stroked-app-window-with-content"/>
+                            <use xlink:href="#stroked-app-window-with-content"/>
                             </svg>
-                            <pre>
-                                <button ng-click="activate(appliance)" ng-hide="isActive(appliance.status)">Activate!</button>
-                                <button ng-click="deactivate(appliance)" ng-show="isActive(appliance.status)">Deactivate!</button>
+
+                            <pre style="background-color: currentColor;">
+                                <button class="btn btn-success center-block" style="margin-top: -10px" ng-click="activate(appliance)" ng-hide="isActive(appliance.status)">Activate!</button>
+                                <button class="btn btn-danger center-block" style="margin-top: -23px"ng-click="deactivate(appliance)" ng-show="isActive(appliance.status)">Deactivate!</button>
                             </pre>
                         </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -121,11 +126,11 @@
 
     <!-- Add device-->
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-2">
             <!-- Trigger the modal with a button -->
             <div class="container">
                 <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add
+                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Add
                     Device
                 </button>
                 <!-- Modal -->
@@ -165,10 +170,10 @@
         </div>
 
         <!--delete form -->
-        <div class="col-lg-6">
+        <div class="col-md-2">
             <div class="container">
                 <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteModal">Delete
+                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#deleteModal">Delete
                     Device
                 </button>
 

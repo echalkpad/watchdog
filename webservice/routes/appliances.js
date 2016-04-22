@@ -164,7 +164,7 @@ var populateDB = function() {
             "active": "active",
             "channel_name": "ch1",
             "alt": "iphone",
-            "image": "glyph stroked app-window",
+            "image": "fa fa-laptop",
             "checked": false
         }
     ];

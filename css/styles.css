@@ -3,7 +3,7 @@ Lumino Admin Bootstrap Template
 Version 1.0
 */
 
-
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display);
 /*Global Styles*/
 
 body {
@@ -926,11 +926,7 @@ h1.page-header {
 	font-size: 10px;
 	border-color: #ddd;
 	height: 65px;
-	overflow: scroll;
-}
 
-.dashboard-icons{
-	background-color: #FDD09F;
 }
 
 
