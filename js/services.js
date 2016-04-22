@@ -46,7 +46,7 @@ angular.module('watchdog')
             {
                 "device_id": 2,
                 "device_name": "Refrigerator",
-                "last_usage" : 230
+                "last_usage" : 23
             },
             {
                 "device_id": 3,
