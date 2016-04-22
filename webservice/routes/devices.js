@@ -3,6 +3,7 @@
 var client_cas = require('../conf/cassandra-conf');
 var fc = require('../utility/functions');
 var healthData = require('../data/critical-health-data');
+var coefficient = require('../data/coefficient');
 var cassandra =  require('cassandra-driver');
 var async = require('async');
 var jsonfile = require('jsonfile');
@@ -54,13 +55,13 @@ exports.getDeviceHealth = function(req, res){
                       //var data = healthData.deveiceCriticalHealth();
                       //console.log(result);
                       //callback(null, result/5);
-                      callback(null, 10);
+                      callback(null, 225, device_type);
                     //}
                   }
                 })
             },
 
-            function(deviceData, callback) {
+            function(deviceData, device_type, callback) {
                 var cquery = "";
                 
                 //cquery = "select SUM(dailyaverageall) from dailystatisticsrefrigeratoralldevice where date >= '"+start_date+"' and date <='"+end_date+"' ALLOW FILTERING "; break; 
@@ -81,7 +82,7 @@ exports.getDeviceHealth = function(req, res){
                           //var data = healthData.deveiceCriticalHealth();
                          // console.log(result);
                           //callback(null, result/5);
-                          callback(null, deviceData, 50);
+                          callback(null, deviceData, device_type, 225);
                       //}
                   }
 
@@ -90,16 +91,21 @@ exports.getDeviceHealth = function(req, res){
                 
             },
 
-            function(deviceData, overAllData) {
+            function(deviceData, device_type, overAllData) {
               var data = healthData.deveiceCriticalHealth();
+              var coef = coefficient.deviceCoefficient()[device_type];
+
 
                 var data = {
-                    "columns": [
-                        ["data1", deviceData],
-                        ["data2", overAllData],
-                        ["data3", data.refrigerator]
-                    ],
-                    "type": "bar"
+                    "data" : {
+                        "columns": [
+                            ["data1", deviceData],
+                            ["data2", overAllData],
+                            ["data3", data.refrigerator]
+                        ],
+                        "type": "bar"
+                    },
+                    "message" : "Based on the your usage the patters and the coefficient, the shelf life of your device is "+(coef/deviceData)
                 };
 
                 console.log(data);
