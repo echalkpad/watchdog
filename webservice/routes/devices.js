@@ -8,6 +8,15 @@ var async = require('async');
 var jsonfile = require('jsonfile');
 
 
+exports.getWeeklyUsage = function(req, res) {
+    var userId = req.params.userId;
+
+    //fetch all appliances for this user
+
+    //for each appliance fetch the usagestatistics
+
+}
+
 exports.getDeviceHealth = function(req, res){
   var payload = req.body;
   var start_date = payload.start_date;
