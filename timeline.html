@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.10/eon.js"></script>
-    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.10/eon.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/c3/c3.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.js"></script>
+    <script src="bower_components/pubnub/web/pubnub.min.js"></script>
     <script src="bower_components/d3/d3.min.js"></script>
     <script src="bower_components/c3/c3.min.js"></script>
-    <script src="js/pubnub-c3.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/pubnub-c3.js"></script>
+    <style>
+        .c3-region-1 {
+            fill: #dd3333;
+            fill-opacity: 0.8
+        }
+    </style>
+
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/datepicker3.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
@@ -17,15 +24,8 @@
     <script src="js/lumino.glyphs.js"></script>
 
     <!--[if lt IE 9]-->
-
-    <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-        <style>
-            .c3-region-1 {
-                fill: #dd3333;
-                fill-opacity: 0.8
-            }
-        </style>
+    <script src="js/html5shiv.min.js"></script>
 
     </head>
     <body>
@@ -83,10 +83,19 @@
             </div>
         </div>
     </div>
+</div>
+
 
 <script>
     var channel_name=sessionStorage.getItem("channel_id")
     console.log("channel name is: "+channel_name)
+
+
+    var pubnub = PUBNUB.init({
+        publish_key: 'demo',
+        subscribe_key: 'demo'
+    });
+
     eon.chart({
         history: true,
         channel: channel_name,
@@ -107,27 +116,7 @@
             }
         }
     });
-    var pubnub = PUBNUB.init({
-        publish_key: 'demo',
-        subscribe_key: 'demo'
-    });
 
-    /*
-    setInterval(function(){
-
-        pubnub.publish({
-            channel: channel,
-            message: {
-                eon: {
-                    'Austin': Math.floor(Math.random() * 99),
-                    'New York': Math.floor(Math.random() * 99),
-                    'San Francisco': Math.floor(Math.random() * 99),
-                    'Portland': Math.floor(Math.random() * 99)
-                }
-            }
-        });
-
-    }, 1000);*/
 
 </script>
 </body>
