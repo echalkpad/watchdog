@@ -103,7 +103,7 @@
                 <div class="panel-body">
                     <div class="icon-grid">
                         <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="appliance in appliances | filter: checked==false">
-                            <pre><a href="timeline.html" ng-click="storeAppId(appliance.channel_name)">{{appliance.device_name}}</a></pre>
+                            <pre><a href="{{appliance.device_type}}" ng-click="storeAppId(appliance.channel_name)">{{appliance.device_name}}</a></pre>
                             <svg class={{appliance.image}}>
                                 <use xlink:href="#stroked-app-window-with-content"/>
                             </svg>
@@ -145,6 +145,10 @@
                                     <input class="form-control" placeholder="Device Name" type="text" ng-model="appliance.device_name"/><br />
                                     <input class="form-control" placeholder="Channel Name" type="text" ng-model="appliance.channel_name"/><br />
                                     <input class="form-control" placeholder="Device Information" type="text" ng-model="appliance.device_info"/><br />
+                                    <select class="form-control" ng-model="appliance.device_type">
+                                        <option  value="mobiletimeline.html">Mobile</option>
+                                        <option value="appliancetimeline.html">Appliance</option>
+                                    </select>
                                     <input type="checkbox" ng-model="appliance.status" value="Active" style="padding-right: 30px">   Active<br /><br />
                                     <button type="submit" class="btn btn-primary" ng-click="add(appliance)" value="Save" >Submit Button</button>
                                     <button type="reset" class="btn btn-default" ng-click="reset()" value="Reset">Reset Button</button>
