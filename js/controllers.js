@@ -3,12 +3,6 @@ angular.module('watchdog')
     .
     controller('DeviceController',['$scope','appFactory' , function($scope,appFactory) {
         $scope.appliances= [];
-      /*  appFactory.getAppliances()
-            .then(
-            function(response) {
-                $scope.appliances = response.data;
-            }
-        );*/
 
         $scope.storeAppId=function(channel_id){
             console.log("channel id is: "+channel_id)
@@ -78,7 +72,8 @@ angular.module('watchdog')
         console.log($scope.appliance)
     }])
     .
-    controller('HealthController',['$scope','appFactory' , function($scope,appFactory) {
+    controller('HealthController',['$scope' , function($scope) {
+        console.log("Health prediction");
         $scope.prediction=function(){
             console.log("Health prediction");
             window.location="Prediction.html";
