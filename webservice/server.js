@@ -23,5 +23,6 @@ app.listen(4000);
 //cassandra services
 app.post('/devices', devices.addDeviceData);
 app.get('/devices/:channel', devices.getDeviceData);
+app.post('/health', devices.getDeviceHealth)
 
 console.log('Listening on port 4000...');

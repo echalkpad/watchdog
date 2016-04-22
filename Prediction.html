@@ -1,0 +1,51 @@
+<html>
+<head>
+    <link href="/css/c3.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="chart"></div>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="/js/c3.js"></script>
+<script>
+//    var data = {
+//        "columns": [
+//            [
+//                "data1",
+//                10
+//            ],
+//            [
+//                "data2",
+//                50
+//            ],
+//            [
+//                "data3",
+//                "225"
+//            ]
+//        ],
+//        "type": "bar"
+//    };
+
+    //var data1="{columns:[[\"data1\",10],[\"data2\",50],[\"data3\",225]],\"type\":\"bar\"}"
+    //        data=data.replace(/^"/, "");
+    //      data=data.replace(/"$/, "");
+    console.log(data);
+
+    var chart = c3.generate({
+        data: data,//{columns:[['data1',10],['data2',50],['data3',225]],type:'bar'},
+        axis: {
+            x: {
+                type: 'categorized'
+            }
+        },
+        bar: {
+            width: {
+                ratio: 0.3,
+//            max: 30
+            },
+        }
+    });
+</script>
+</body>
+</html>
